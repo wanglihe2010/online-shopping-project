@@ -26,4 +26,10 @@ public class CustomerController {
     public Customer addCustomer(@RequestBody  Customer customer) {
         return this.customerService.add(customer);
     }
+
+    @GetMapping(value = "customers/{email}", produces = "application/json")
+    public Customer getCustomerByEmail(@PathVariable("email") String email) {
+        System.out.println("port 1 called");
+        return this.customerService.getCustomerByEmail(email);
+    }
 }

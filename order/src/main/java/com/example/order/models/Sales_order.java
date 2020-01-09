@@ -7,17 +7,17 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class Order {
+public class Sales_order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Date date;
-    private String email_id;
+    private String emailId;
     private String description;
     private Double price;
 
-    public Order() {
+    public Sales_order() {
     }
 
     public Long getId() {
@@ -36,12 +36,12 @@ public class Order {
         this.date = date;
     }
 
-    public String getEmail_id() {
-        return email_id;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public void setEmail_id(String email_id) {
-        this.email_id = email_id;
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 
     public String getDescription() {
