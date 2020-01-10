@@ -27,8 +27,8 @@ public class OrderService {
         return this.orderLineItemRepository.save(order_line_item);
     }
 
-    public Sales_order getSaleOrderByEmailId(String email_id) {
-        return this.salesOrderRepository.getSales_orderByEmailId(email_id);
+    public List<Sales_order> getSaleOrderByEmailId(String email_id) {
+        return this.salesOrderRepository.getSales_ordersByEmailId(email_id);
     }
 
     public List<Order_line_item> getOrderLineItemsByOrderId(Long order_id) {

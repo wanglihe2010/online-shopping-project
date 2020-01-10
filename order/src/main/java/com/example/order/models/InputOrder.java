@@ -9,7 +9,7 @@ public class InputOrder {
     private String description;
     private double price;
     private List<String> itemNames;
-    private Integer quantity;
+
 
     public InputOrder() {
     }
@@ -54,11 +54,15 @@ public class InputOrder {
         this.itemNames = itemNames;
     }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("InputOrder{");
+        sb.append("date=").append(date);
+        sb.append(", email_id='").append(email_id).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", price=").append(price);
+        sb.append(", itemNames=").append(itemNames);
+        sb.append('}');
+        return sb.toString();
     }
 }
