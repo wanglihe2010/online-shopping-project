@@ -5,6 +5,7 @@ import com.example.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -19,6 +20,7 @@ public class CustomerController {
 
     @GetMapping(value = "customers", produces = "application/json")
     public List<Customer> getALL() {
+        System.out.println(new Date());
         return this.customerService.getAll();
     }
 

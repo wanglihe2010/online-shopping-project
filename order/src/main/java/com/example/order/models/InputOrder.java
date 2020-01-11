@@ -12,6 +12,7 @@ public class InputOrder {
 
 
     public InputOrder() {
+        date = new Date();
     }
 
     public Date getDate() {
