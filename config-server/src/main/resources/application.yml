@@ -8,5 +8,5 @@ spring:
         git:
           uri: https://github.com/wanglihe2010/online-shopping-project-config-server
           search-paths: shopping
-          default-label: h2DatabaseConfig
+#          default-label: h2DatabaseConfig
 server.port: 8888
