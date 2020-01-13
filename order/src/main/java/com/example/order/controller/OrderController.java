@@ -4,9 +4,12 @@ import com.example.order.models.*;
 import com.example.order.services.CustomerServiceProxy;
 import com.example.order.services.ItemServiceProxy;
 import com.example.order.services.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.Order;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "order")
 public class OrderController {
+    private static final Logger logger= LoggerFactory.getLogger(OrderController.class);
     private OrderService orderService;
     private CustomerServiceProxy customerServiceProxy;
     private ItemServiceProxy itemServiceProxy;
@@ -29,9 +33,8 @@ public class OrderController {
     public Long createOrder(@RequestBody InputOrder inputOrder) {
         // validate the customer
         Customer customer = this.customerServiceProxy.getCustomerByEmail(inputOrder.getEmail_id());
-        System.out.println(customer);
         if(customer == null) {
-            System.out.println("email not existed");
+            logger.info("email not existed or customer-service is down. Email: " + inputOrder.getEmail_id());
             return -1L;
         }
 
@@ -45,7 +48,7 @@ public class OrderController {
             Long item_qty = entry.getValue();
             Item item = this.itemServiceProxy.getItemByName(item_name);
             if (item == null) {
-                System.out.println("item not existed");
+                logger.info("item not existed or item-service is down, Item name: " + item_name);
                 return -1L;
             } else {
                 inputOrder.setPrice(inputOrder.getPrice() + item_qty.intValue() * item.getPrice());
@@ -90,7 +93,6 @@ public class OrderController {
             inputOrder.setEmail_id(sales_order.getEmailId());
             inputOrder.setItemNames(itemNames);
             inputOrder.setPrice(sales_order.getPrice());
-            System.out.println(inputOrder);
             return inputOrder;
         }).collect(Collectors.toList());
     }

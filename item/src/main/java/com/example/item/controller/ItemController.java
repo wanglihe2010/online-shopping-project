@@ -2,6 +2,8 @@ package com.example.item.controller;
 
 import com.example.item.models.Item;
 import com.example.item.service.ItemService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "item")
 public class ItemController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
     @Autowired
     private ItemService itemService;
 
@@ -33,7 +37,7 @@ public class ItemController {
     @Cacheable(value = "items", key = "#name")
     @GetMapping(value = "items/{name}", produces = "application/json")
     public Item getItem(@PathVariable("name") String name) {
-        System.out.println("getItem called");
+        logger.info("getItem: " + name);
         return this.itemService.getItem(name);
     }
 }

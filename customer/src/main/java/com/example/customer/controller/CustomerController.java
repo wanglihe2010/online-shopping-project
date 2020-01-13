@@ -2,6 +2,8 @@ package com.example.customer.controller;
 
 import com.example.customer.models.Customer;
 import com.example.customer.service.CustomerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping("customer")
 public class CustomerController {
+
+    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
     @Autowired
     private CustomerService customerService;
 
@@ -20,7 +24,7 @@ public class CustomerController {
 
     @GetMapping(value = "customers", produces = "application/json")
     public List<Customer> getALL() {
-        System.out.println(new Date());
+        logger.info("get all customers function called");
         return this.customerService.getAll();
     }
 
