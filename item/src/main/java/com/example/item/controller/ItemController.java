@@ -34,7 +34,7 @@ public class ItemController {
         return this.itemService.addItem(item);
     }
 
-    @Cacheable(value = "items", key = "#name")
+//    @Cacheable(value = "items", key = "#name")
     @GetMapping(value = "items/{name}", produces = "application/json")
     public Item getItem(@PathVariable("name") String name) {
         logger.info("getItem: " + name);
