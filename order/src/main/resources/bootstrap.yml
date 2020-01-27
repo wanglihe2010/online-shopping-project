@@ -1,6 +1,15 @@
+---
 spring:
   cloud:
     config:
       uri: http://localhost:8888
   application:
     name: order-service
+server:
+  port: 9393
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
