@@ -1,0 +1,2 @@
+2020-01-28 15:59:15,230 INFO com.example.item.controller.ItemController [http-nio-9292-exec-1] getItem: airpod
+{"@timestamp":"2020-01-28T23:30:14.345Z","classname":"com.example.item.controller.ItemController","method":"getItem","file":"ItemController.java","line":42,"thread":"http-nio-9292-exec-1","logger_name":"com.example.item.controller.ItemController","level":"INFO","message":"getItem: airpod","traceId":"5116944682156862","spanId":"5116944682156862","spanExportable":"true","X-Span-Export":"true","X-B3-SpanId":"5116944682156862","X-B3-TraceId":"5116944682156862"}

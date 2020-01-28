@@ -1,0 +1,1 @@
+2020-01-28 11:02:24.876  INFO [item-service,bbe79f704b61a9a9,bbe79f704b61a9a9,true] 6120 --- [http-nio-9292-exec-1] c.e.item.controller.ItemController       : getItem: airpod
