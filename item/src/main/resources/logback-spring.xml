@@ -5,42 +5,86 @@
 
     <appender name="Console"
               class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>
-                %black(%d{ISO8601}) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable
-            </Pattern>
+<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
+        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+<!--            <Pattern>-->
+<!--                %black(%d{ISO8601}) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable-->
+<!--            </Pattern>-->
+            <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+<!--                <prettyPrint>true</prettyPrint>-->
+            </jsonFormatter>
+            <appendLineSeparator>true</appendLineSeparator>
         </layout>
     </appender>
 
     <appender name="RollingFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGS}/spring-boot-logger.log</file>
+        <file>${LOGS}/item-service.log</file>
+<!--        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">-->
+<!--            <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">-->
+<!--                 <prettyPrint>true</prettyPrint>-->
+<!--            </jsonFormatter>-->
+<!--&lt;!&ndash;            <appendLineSeparator>true</appendLineSeparator>&ndash;&gt;-->
+<!--        </layout>-->
+<!--        <encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-<!--        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
-<!--            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>-->
+<!--&lt;!&ndash;        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">&ndash;&gt;-->
+<!--&lt;!&ndash;            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>&ndash;&gt;-->
             <providers>
+<!--&lt;!&ndash;                <omitEmptyFields>true</omitEmptyFields>&ndash;&gt;-->
+<!--                <timestamp/>-->
+<!--                <pattern>-->
+<!--                    <pattern>-->
+<!--                        {-->
+<!--                            "message": "%message",-->
+<!--                            "method":"%method",-->
+<!--                            "metric": "%metric"-->
+<!--                        }-->
+<!--                    </pattern>-->
+
+<!--                </pattern>-->
                 <timestamp>
                     <timeZone>UTC</timeZone>
                 </timestamp>
-                <callerData>
-                    <classFieldName>classname</classFieldName>
-                    <methodFieldName>method</methodFieldName>
-                    <fileFieldName>file</fileFieldName>
-                    <lineFieldName>line</lineFieldName>
-                </callerData>
-                <threadName>
-                    <fieldName>thread</fieldName>
-                </threadName>
-                <loggerName/>
-                <logLevel/>
-                <message/>
-                <mdc/>
-                <arguments>
-                    <includeNonStructuredArguments>true</includeNonStructuredArguments>
-                </arguments>
+                <nestedField>
+                    <fieldName>Logger Info</fieldName>
+                    <providers>
+                        <callerData>
+                            <classFieldName>classname</classFieldName>
+                            <methodFieldName>method</methodFieldName>
+                            <fileFieldName>file</fileFieldName>
+                            <lineFieldName>line</lineFieldName>
+                        </callerData>
+                    </providers>
+                </nestedField>
+
+<!--                <threadName>-->
+<!--                    <fieldName>thread</fieldName>-->
+<!--                </threadName>-->
                 <logstashMarkers/>
-                <stackTrace/>
+<!--                <stackTrace/>-->
+<!--                <loggerName/>-->
+<!--                <logLevel/>-->
+                <message/>
+<!--                <mdc/>-->
+<!--                <arguments>-->
+<!--                    <includeNonStructuredArguments>true</includeNonStructuredArguments>-->
+<!--                </arguments>-->
+
             </providers>
+<!--&lt;!&ndash;            <fieldNames>&ndash;&gt;-->
+<!--&lt;!&ndash;                <version>[ignore]</version>&ndash;&gt;-->
+<!--&lt;!&ndash;                <message>msg</message>&ndash;&gt;-->
+<!--&lt;!&ndash;                <logger>[ignore]</logger>&ndash;&gt;-->
+<!--&lt;!&ndash;                <thread>[ignore]</thread>&ndash;&gt;-->
+<!--&lt;!&ndash;                <level>[ignore]</level>&ndash;&gt;-->
+<!--&lt;!&ndash;                <levelValue>[ignore]</levelValue>&ndash;&gt;-->
+<!--&lt;!&ndash;                <traceId>[ignore]</traceId>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <spanId>[ignore]</spanId>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <spanExportable>[ignore]</spanExportable>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <X-Span-Export>[ignore]</X-Span-Export>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <X-B3-SpanId>[ignore]</X-B3-SpanId>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            </fieldNames>&ndash;&gt;-->
         </encoder>
 
         <rollingPolicy

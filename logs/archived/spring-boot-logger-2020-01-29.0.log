@@ -1,0 +1,16 @@
+{
+  "timestamp" : "1580340721660",
+  "level" : "INFO",
+  "thread" : "http-nio-9292-exec-1",
+  "mdc" : {
+    "traceId" : "58d3c218da07c9b5",
+    "spanId" : "58d3c218da07c9b5",
+    "spanExportable" : "true",
+    "X-Span-Export" : "true",
+    "X-B3-SpanId" : "58d3c218da07c9b5",
+    "X-B3-TraceId" : "58d3c218da07c9b5"
+  },
+  "logger" : "com.example.item.controller.ItemController",
+  "message" : "",
+  "context" : "default"
+}
